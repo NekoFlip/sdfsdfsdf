@@ -16,14 +16,24 @@
   <script src="https://www.google.com/recaptcha/enterprise.js" async defer></script>
   <script>
     // Функция строго в глобальной области видимости
-    function enableSubmitBtn() {
-        var input = document.getElementById('submitBtn');
-        if (input) {
-            input.removeAttribute('disabled'); // Или button.disabled = false;
-            console.log("Кнопка успешно разблокирована!");
-        } else {
-            console.error("Элемент с id 'submitBtn' не найден на странице.");
-        }
+    // Вызывается автоматически капчей после успешного прохождения (data-callback="enableSubmitBtn")
+    // token — строка токена, которую передаёт reCAPTCHA
+    function enableSubmitBtn(token) {
+        // Находим капчу, которая только что была решена (у неё появился data-response)
+        var widgets = document.querySelectorAll('.g-recaptcha');
+        var targetForm = null;
+        widgets.forEach(function(widget) {
+            // Ищем форму-родитель каждого виджета
+            var f = widget.closest('form');
+            if (f && !targetForm) targetForm = f;
+        });
+        // Если нашли форму — разблокируем submit внутри неё
+        // Но так как обе капчи вызывают одну функцию, разблокируем обе
+        // (пользователь решил хотя бы одну — значит он живой человек)
+        document.querySelectorAll('#mainSubmitBtn, #modalSubmitBtn').forEach(function(btn) {
+            btn.removeAttribute('disabled');
+        });
+        console.log("Капча пройдена, кнопки разблокированы. Token:", token ? token.substring(0,20) + "…" : "—");
     }
 </script>
 
@@ -143,6 +153,7 @@
       transition: background 0.2s;
     }
     .modal-form .btn-submit:hover { background: #2e96cc; }
+    .modal-form .btn-submit:disabled { background: #a0cfe8; cursor: not-allowed; }
     .modal-form .privacy-note {
       font-size: 11px;
       color: #aaa;
@@ -318,7 +329,8 @@
       transition: background 0.2s;
       white-space: nowrap;
     }
-    .cta-2-form .form-submit input[type="submit"]:hover { background: #2e96cc; }
+    .cta-2-form .form-submis input[type="submit"]:hover { background: #2e96cc; }
+    .cta-2-form .form-submis input[type="submit"]:disabled { background: #a0cfe8; cursor: not-allowed; }
     .form-success-msg {
       display: none;
       color: #2e7d32;
@@ -813,13 +825,11 @@
           <div class="form-row">
             <input type="text" name="name" placeholder="Ваше имя" required>
             <input type="tel" name="phone" placeholder="+7 (___) ___ __ __" required>
-            <div class="form-submis">
-              <input type="submit" value="Отправить" id="submitBtn" disabled>
-            <form action="" method="POST">
-              <div class="g-recaptcha" data-sitekey="6LfxTy0tAAAAAKQo4Wi8Gj8_R5Nd7qdV5UFdgOlw" data-action="enableSubmitBtn"></div>
-            </div>
           </div>
-         
+          <div class="g-recaptcha" style="margin:12px 0;" data-sitekey="6LfxTy0tAAAAAKQo4Wi8Gj8_R5Nd7qdV5UFdgOlw" data-callback="enableSubmitBtn"></div>
+          <div class="form-submis">
+            <input type="submit" value="Отправить" id="mainSubmitBtn" disabled>
+          </div>
           <div class="pp">Нажимая кнопку вы даёте согласие на <a href="#" target="_blank">обработку персональных данных</a></div>
           <div class="form-success-msg" id="mainFormSuccess">✅ Заявка отправлена! Перезвоним в течение 15 минут.</div>
         </form>
@@ -871,9 +881,8 @@
         <input type="text" name="name" placeholder="Ваше имя" required>
         <input type="tel" name="phone" placeholder="+7 (___) ___ __ __" required>
       </div>
-    <form action="" method="POST">
-      <div class="g-recaptcha" data-sitekey="6LfxTy0tAAAAAKQo4Wi8Gj8_R5Nd7qdV5UFdgOlw" data-action="enableSubmitBtn"></div>
-      <button type="submit" class="btn-submit" id="submitBtn" disabled>Перезвоните мне</button>
+      <div class="g-recaptcha" data-sitekey="6LfxTy0tAAAAAKQo4Wi8Gj8_R5Nd7qdV5UFdgOlw" data-callback="enableSubmitBtn"></div>
+      <button type="submit" class="btn-submit" id="modalSubmitBtn" disabled>Перезвоните мне</button>
       <div class="privacy-note">Нажимая кнопку, вы соглашаетесь на <a href="#">обработку персональных данных</a></div>
     </form>
     <div class="modal-success" id="callbackSuccess">
