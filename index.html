@@ -14,6 +14,18 @@
   <link rel="stylesheet" href="css/fgsjh_1.css" media="all">
   <script src="js/fgsjh_2.js" type="text/javascript"></script>
   <script src="https://www.google.com/recaptcha/enterprise.js" async defer></script>
+  <script>
+    // Функция строго в глобальной области видимости
+    function enableSubmitBtn() {
+        var button = document.getElementById('submitBtn');
+        if (button) {
+            button.removeAttribute('disabled'); // Или button.disabled = false;
+            console.log("Кнопка успешно разблокирована!");
+        } else {
+            console.error("Элемент с id 'submitBtn' не найден на странице.");
+        }
+    }
+</script>
 
   <style>
     /* ===== ОБЩИЕ СТИЛИ ===== */
