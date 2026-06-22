@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="ru-RU">
+<head>
+  <meta charset="UTF-8">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="theme-color" content="#B8E5F8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Расчистка участков — Воробьев и компания</title>
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <link rel="icon" href="images/favicon.jpg" sizes="32x32">
+  <link rel="stylesheet" href="css/fgsjh.css" media="all">
+  <link rel="stylesheet" href="css/fgsjh_2.css" media="all">
+  <link rel="stylesheet" href="css/fgsjh_3.css" media="all">
+  <link rel="stylesheet" href="css/fgsjh_1.css" media="all">
+  <script src="js/fgsjh_2.js" type="text/javascript"></script>
+
+  <style>
+    /* ===== ОБЩИЕ СТИЛИ ===== */
+    .first-banner .container {
+      height: auto;
+      padding-bottom: 40px;
+      padding-top: 40px;
+      min-height: 600px;
+    }
+    .first-banner .frame-box { height: auto; }
+    .feature-row { justify-content: space-between; }
+    .first-banner .feature-row .feture { width: 50%; margin-right: 0; }
+    .first-banner .feature-row .feture div { font-size: 16px; }
+    .video-slider h2 { line-height: 1.3; }
+    .slider-main .video-slide .title-shadow { max-width: 90%; width: 90%; }
+    .cta-block { min-height: 440px; height: auto; }
+    .cta .container .tracktor { bottom: unset; top: 250px; right: -100px; }
+    .page-template-default h5,
+    .page-template-default .li,
+    .descr,
+    .page-template-default h4 { margin-bottom: 30px; }
+    .slick-slide img { display: block; width: 95px; height: 95px; }
+
+    @media only screen and (max-width: 1024px) {
+      .slider-nav { z-index: 20; }
+      #about .slider-nav { position: relative; top: -150px; }
+      #about .slick-prev, #about .slick-next { top: -50px; }
+    }
+    @media only screen and (max-width: 780px) {
+      .first-banner .feature-row .feture { width: 100%; }
+    }
+
+    /* ===== МОДАЛЬНОЕ ОКНО «ЗАКАЗАТЬ ЗВОНОК» ===== */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      animation: fadeIn 0.25s ease;
+    }
+    .modal-overlay.active { display: flex; }
+    .modal-box {
+      background: #fff;
+      border-radius: 16px;
+      padding: 40px 36px 32px;
+      max-width: 480px;
+      width: 90%;
+      position: relative;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+      animation: slideUp 0.3s ease;
+    }
+    @keyframes slideUp {
+      from { transform: translateY(40px); opacity: 0; }
+      to   { transform: translateY(0);    opacity: 1; }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    .modal-close {
+      position: absolute;
+      top: 14px; right: 18px;
+      font-size: 26px;
+      cursor: pointer;
+      color: #888;
+      line-height: 1;
+      background: none;
+      border: none;
+      padding: 0;
+    }
+    .modal-close:hover { color: #333; }
+    .modal-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: #1a2b3c;
+      margin-bottom: 6px;
+    }
+    .modal-subtitle {
+      font-size: 14px;
+      color: #7a8a9a;
+      margin-bottom: 24px;
+    }
+    .modal-form .field-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .modal-form input[type="text"],
+    .modal-form input[type="tel"] {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1.5px solid #dce3ea;
+      border-radius: 8px;
+      font-size: 15px;
+      outline: none;
+      transition: border-color 0.2s;
+      box-sizing: border-box;
+    }
+    .modal-form input:focus { border-color: #4aaedc; }
+    .modal-form .h-captcha { margin-bottom: 16px; }
+    .modal-form .btn-submit {
+      width: 100%;
+      background: #4aaedc;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 14px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .modal-form .btn-submit:hover { background: #2e96cc; }
+    .modal-form .privacy-note {
+      font-size: 11px;
+      color: #aaa;
+      text-align: center;
+      margin-top: 10px;
+    }
+    .modal-form .privacy-note a { color: #4aaedc; }
+    .modal-success {
+      display: none;
+      text-align: center;
+      padding: 20px 0;
+    }
+    .modal-success .success-icon {
+      font-size: 56px;
+      margin-bottom: 12px;
+    }
+    .modal-success p {
+      font-size: 16px;
+      color: #333;
+    }
+
+    /* ===== БЛОК ОТЗЫВОВ ===== */
+    .reviews-section {
+      padding: 60px 0;
+      background: #f4f9fc;
+    }
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 24px;
+      margin-top: 36px;
+    }
+    .review-card {
+      background: #fff;
+      border-radius: 14px;
+      padding: 24px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      position: relative;
+    }
+    .review-card::before {
+      content: '"';
+      font-size: 80px;
+      color: #e0f2fb;
+      position: absolute;
+      top: 8px;
+      left: 18px;
+      line-height: 1;
+      font-family: Georgia, serif;
+    }
+    .review-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .review-avatar {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      object-fit: cover;
+      background: #cde7f5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      font-weight: 700;
+      color: #4aaedc;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+    .review-meta .review-name {
+      font-weight: 700;
+      font-size: 15px;
+      color: #1a2b3c;
+    }
+    .review-meta .review-date {
+      font-size: 12px;
+      color: #aaa;
+    }
+    .review-stars { color: #f5a623; font-size: 15px; letter-spacing: 1px; }
+    .review-text { font-size: 14px; color: #4a5568; line-height: 1.65; position: relative; z-index: 1; }
+    .review-source {
+      font-size: 11px;
+      color: #bbb;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .review-source span { color: #4aaedc; font-weight: 600; }
+
+    /* ===== БЛОК ВИДЕО ===== */
+    .videos-section {
+      padding: 60px 0;
+      background: #fff;
+    }
+    .videos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 24px;
+      margin-top: 36px;
+    }
+    .video-card {
+      border-radius: 14px;
+      overflow: hidden;
+      position: relative;
+      aspect-ratio: 16/9;
+      background: #000;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    }
+    .video-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.8;
+      transition: opacity 0.3s;
+    }
+    .video-card:hover img { opacity: 0.65; }
+    .video-play-btn {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .video-play-btn svg {
+      width: 64px;
+      height: 64px;
+      filter: drop-shadow(0 2px 8px rgba(0,0,0,0.4));
+      transition: transform 0.2s;
+    }
+    .video-card:hover .video-play-btn svg { transform: scale(1.1); }
+    .video-card-label {
+      position: absolute;
+      bottom: 12px;
+      left: 14px;
+      right: 14px;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 600;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+    }
+
+    /* ===== CTA-2 БЛОК (форма заявки) ===== */
+    .cta-2-form .form-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .cta-2-form input[type="text"],
+    .cta-2-form input[type="tel"] {
+      flex: 1;
+      min-width: 180px;
+      padding: 12px 16px;
+      border: 1.5px solid #dce3ea;
+      border-radius: 8px;
+      font-size: 15px;
+      outline: none;
+    }
+    .cta-2-form input:focus { border-color: #4aaedc; }
+    .cta-2-form .h-captcha { margin: 12px 0; }
+    .cta-2-form .form-submis input[type="submit"] {
+      background: #4aaedc;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 28px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s;
+      white-space: nowrap;
+    }
+    .cta-2-form .form-submit input[type="submit"]:hover { background: #2e96cc; }
+    .form-success-msg {
+      display: none;
+      color: #2e7d32;
+      font-weight: 600;
+      padding: 10px 0;
+    }
+
+    /* ===== КНОПКА «ЗАКАЗАТЬ ЗВОНОК» — все кнопки-триггеры ===== */
+    .open-callback-modal { cursor: pointer; }
+
+    /* Фоновые изображения */
+    .first-banner {
+      width: 100%;
+      animation: 3s banner ease;
+      background: url(images/clean.jpg) center;
+      background-size: cover;
+    }
+    .first-banner .container {
+      display: flex;
+      align-items: center;
+      height: 600px;
+    }
+    @keyframes banner {
+      0%   { background: url(images/trash.jpg) center; background-size: cover; }
+      40%  { background: url(images/trash.jpg) center; background-size: cover; }
+      50%  { background: url(images/clean.jpg) center; background-size: cover; }
+      100% { background: url(images/clean.jpg) center; background-size: cover; }
+    }
+    .cta .container .tracktor {
+      width: 448px; height: 368px;
+      background: url(images/traktor.png);
+      position: absolute; bottom: -85px; right: -100px;
+    }
+    .cta .container .minuta {
+      width: 110px; height: 114px;
+      background: url(images/time.png);
+      position: absolute; top: -25px; right: 230px;
+      filter: drop-shadow(5px 8px 21px rgba(107,150,174,0.38));
+    }
+  </style>
+</head>
+<body class="home page-template page-template-homepage page-template-homepage-php page page-id-73">
+
+<!-- ===== ШАПКА ===== -->
+<header class="ndg-header">
+  <div class="container flex-row fsb aic">
+    <a href="#" class="ndg-site-logo">
+      <!-- ЗАМЕНИТЕ src на путь к вашему новому логотипу -->
+      <img src="images/logo.png" alt="Расчистка участков — Воробьев и компания">
+    </a>
+    <div class="menu-glavnoe-container">
+      <ul id="menu-glavnoe" class="top-menu">
+        <li><a href="#about">О компании</a></li>
+        <li><a href="#price">Прайс</a></li>
+        <li><a href="#portfolio">Примеры работ</a></li>
+        <li><a href="#reviews">Отзывы</a></li>
+        <li><a href="#videos">Видео</a></li>
+      </ul>
+    </div>
+    <div class="header-phone">
+      <!-- ЗАМЕНИТЕ номер телефона на актуальный -->
+      <a href="tel:+79164272554">+7 (916) 427-25-54</a>
+      <span class="online-status"><span class="online">Сейчас в сети</span></span>
+    </div>
+    <button class="btn open-callback-modal">Заказать звонок</button>
+    <div class="mobile-menu-btn"><span></span><span></span><span></span></div>
+  </div>
+</header>
+
+<!-- Мобильное меню -->
+<div class="mobile-menu">
+  <div class="menu-glavnoe-container">
+    <ul class="mob-menu">
+      <li><a href="#about">О компании</a></li>
+      <li><a href="#price">Прайс</a></li>
+      <li><a href="#portfolio">Примеры работ</a></li>
+      <li><a href="#reviews">Отзывы</a></li>
+      <li><a href="#videos">Видео</a></li>
+    </ul>
+  </div>
+  <div class="header-phone">
+    <a href="tel:+79164272554">+7 (916) 427-25-54</a>
+    <span class="online-status"><span class="online">Сейчас в сети</span></span>
+    <button class="btn open-callback-modal">Заказать звонок</button>
+  </div>
+</div>
+
+<!-- ===== ПЕРВЫЙ ЭКРАН (БАННЕР) ===== -->
+<div class="first-banner">
+  <div class="container">
+    <div class="frame-box">
+      <div class="frame">
+        <h1>Расчистка и уборка земельного участка</h1>
+        <div class="banner_subtitle">100% гарантия качества выполненной работы</div>
+        <div class="feature-row">
+          <div class="feture"><span>1</span><div>Выезд в любой район по России</div></div>
+          <div class="feture"><span>2</span><div>Перезвоним в течение 15 минут</div></div>
+        </div>
+        <div class="offer"><strong>Получить расчет стоимости расчистки и уборки вашего участка,</strong> ответив на 5 вопросов за 1 минуту</div>
+        <div class="flex-row aic">
+          <a target="_blank" href="https://mrqz.me/vorob" class="btn">Рассчитать</a>
+          <div class="arrow-to-button"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== О КОМПАНИИ ===== -->
+<div class="about-company" id="about">
+  <div class="container">
+    <div class="about-frame">
+      <div class="title-shadow">
+        <span class="shadow">О компании</span>
+        <h2>О компании</h2>
+      </div>
+      <div class="about-text">
+        <p>Мы начинали свою деятельность как небольшая бригада рабочих, выполняющих любые работы по благоустройству. Через некоторое время сосредоточились на оказании услуг по расчистке загородных участков.</p>
+        <p>Сейчас у нас две бригады, каждая состоит из мастера и двух рабочих. В оснащение бригады входит ручной и бензоинструмент. Для сложных работ привлекается специальная техника. Также есть оборудование для акарицидной обработки.</p>
+        <p>Наша компания расчищает любые земельные участки — дачные, ИЖС, сельхоз назначения для последующей продажи или под строительство. Перед началом работ всегда фиксируем цену и не меняем её.</p>
+      </div>
+      <!-- ЗАМЕНИТЕ src на фото компании / команды -->
+      <img src="images/about.png" alt="О компании">
+    </div>
+
+    <!-- Видео-слайдер (существующий) -->
+    <div class="video-slider">
+      <div class="flex-row fsb">
+        <div class="slider-main">
+          <div class="video-slide" style="background:url(images/IMG_20210629_203551-scaled.jpg); background-size:cover;">
+            <div class="title-shadow"><span class="shadow">Как работаем</span><h2>Видео о работе</h2></div>
+            <a class="play vp-a" href="https://rasschitka.ru/wp-content/uploads/2021/07/VID-20210706-WA0028.mp4">play</a>
+          </div>
+          <div class="video-slide" style="background:url(images/IMG_20200630_143122-scaled.jpg); background-size:cover;">
+            <div class="title-shadow"><span class="shadow">Как работаем</span><h2>Видео о работе</h2></div>
+            <a class="play vp-a" href="https://rasschitka.ru/wp-content/uploads/2021/07/VID-20200810-WA0001-1.mp4">play</a>
+          </div>
+          <div class="video-slide" style="background:url(images/slide1.jpg); background-size:cover;">
+            <div class="title-shadow"><span class="shadow">Как работаем</span><h2>Видео о работе</h2></div>
+            <a class="play vp-a" href="https://rasschitka.ru/wp-content/uploads/2021/07/VID-20200811-WA0011-1.mp4">play</a>
+          </div>
+          <div class="video-slide" style="background:url(images/video_cover_1.jpg); background-size:cover;">
+            <div class="title-shadow"><span class="shadow">Как работаем</span><h2>Видео о работе</h2></div>
+            <a class="play vp-a" href="https://rasschitka.ru/wp-content/uploads/2021/07/VID-20210706-WA0029.mp4">play</a>
+          </div>
+        </div>
+        <div class="slider-vertical">
+          <div class="video-vert-slide">
+            <div class="vert-wrapper" style="background:url(images/IMG_20210629_203551-scaled.jpg); background-size:cover;">
+              <a class="play vp-a" href="https://rasschitka.ru/wp-content/uploads/2021/07/VID-20210706-WA0028.mp4">play</a>
+            </div>
+          </div>
+          <div class="video-vert-slide">
+            <div class="vert-wrapper" style="background:url(images/IMG_20200630_143122-scaled.jpg); background-size:cover;">
+              <a class="play vp-a" href="https://rasschitka.ru/wp-content/uploads/2021/07/VID-20200810-WA0001-1.mp4">play</a>
+            </div>
+          </div>
+          <div class="video-vert-slide">
+            <div class="vert-wrapper" style="background:url(images/slide1.jpg); background-size:cover;">
+              <a class="play vp-a" href="https://rasschitka.ru/wp-content/uploads/2021/07/VID-20200811-WA0011-1.mp4">play</a>
+            </div>
+          </div>
+          <div class="video-vert-slide">
+            <div class="vert-wrapper" style="background:url(images/video_cover_1.jpg); background-size:cover;">
+              <a class="play vp-a" href="https://rasschitka.ru/wp-content/uploads/2021/07/VID-20210706-WA0029.mp4">play</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="slider-nav"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== ПРАЙС ===== -->
+<div class="price" id="price">
+  <div class="container">
+    <div class="title-shadow">
+      <span class="shadow">Наш прайс</span>
+      <h2>Наш прайс</h2>
+    </div>
+    <div class="price-table">
+      <div class="price-table-head">
+        <div class="cell-1">Наименование услуги</div>
+        <div class="cell-2">Единица измерения</div>
+        <div class="cell-3">Цена</div>
+      </div>
+      <div class="price-table-body">
+        <!-- ОБНОВЛЁННЫЕ ЦЕНЫ — замените по необходимости -->
+        <div class="price-table-row">
+          <div class="cell-1">Уборка и расчистка участка</div>
+          <div class="cell-2">Сотка</div>
+          <div class="cell-3">От 3 500 ₽</div>
+        </div>
+        <div class="price-table-row">
+          <div class="cell-1">Вырубка кустарников</div>
+          <div class="cell-2">Сотка</div>
+          <div class="cell-3">От 3 500 ₽</div>
+        </div>
+        <div class="price-table-row">
+          <div class="cell-1">Корчевка пней</div>
+          <div class="cell-2">1 см диаметра</div>
+          <div class="cell-3">От 40 ₽</div>
+        </div>
+        <div class="price-table-row">
+          <div class="cell-1">Покос и уборка травы</div>
+          <div class="cell-2">Сотка</div>
+          <div class="cell-3">От 3 000 ₽</div>
+        </div>
+        <div class="price-table-row">
+          <div class="cell-1">Измельчение веток в щепу до 20 см</div>
+          <div class="cell-2">—</div>
+          <div class="cell-3">От 12 000 ₽</div>
+        </div>
+        <div class="price-table-row">
+          <div class="cell-1">Работа трактора</div>
+          <div class="cell-2">—</div>
+          <div class="cell-3">От 12 000 ₽</div>
+        </div>
+        <div class="price-table-row">
+          <div class="cell-1">Вывоз порубочных остатков контейнером</div>
+          <div class="cell-2">—</div>
+          <div class="cell-3">От 7 500 ₽</div>
+        </div>
+        <div class="price-table-row">
+          <div class="cell-1">Вывоз порубочных остатков машиной</div>
+          <div class="cell-2">—</div>
+          <div class="cell-3">От 7 000 ₽</div>
+        </div>
+        <div class="price-table-row">
+          <div class="cell-1">Авторский надзор</div>
+          <div class="cell-2">—</div>
+          <div class="cell-3">Бесплатно</div>
+        </div>
+        <div class="price-table-row">
+          <div class="cell-1">Снос и демонтаж зданий / сооружений</div>
+          <div class="cell-2">—</div>
+          <div class="cell-3">От 9 000 ₽</div>
+        </div>
+        <div class="price-table-row">
+          <div class="cell-1">Акарицидная обработка участка</div>
+          <div class="cell-2">Сотка</div>
+          <div class="cell-3">От 800 ₽</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== CTA (заменён тестовый блок на «Заказать звонок») ===== -->
+<div class="cta">
+  <div class="container">
+    <div class="minuta"></div>
+    <div class="cta-block">
+      <div class="cta-frame">
+        <div class="cta-title-1">Узнайте стоимость</div>
+        <div class="cta-title-2">расчистки земельного участка</div>
+        <div class="cta-title-3">100% гарантия качества выполненной работы</div>
+        <div class="cta-title-4"><strong>Хотите узнать точную стоимость?</strong> Оставьте заявку — перезвоним в течение 15 минут и рассчитаем всё бесплатно.</div>
+        <div class="flex-row aic" style="margin-top:24px;">
+          <button class="btn open-callback-modal">Заказать звонок</button>
+          <div class="arrow-to-button"></div>
+        </div>
+      </div>
+    </div>
+    <div class="tracktor"></div>
+  </div>
+</div>
+
+<!-- ===== ОТЗЫВЫ ===== -->
+<section class="reviews-section" id="reviews">
+  <div class="container">
+    <div class="title-shadow">
+      <span class="shadow">Отзывы</span>
+      <h2>Отзывы клиентов</h2>
+    </div>
+    <div class="reviews-grid">
+
+      <!-- Отзыв 1 -->
+      <div class="review-card">
+        <div class="review-header">
+          <div class="review-avatar">Д</div>
+          <div class="review-meta">
+            <div class="review-name">Дмитрий</div>
+            <div class="review-date">13 июля 2021</div>
+          </div>
+        </div>
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">Алексей, спасибо вашей бригаде за работу! Быстро и качественно очистили участок. Приятно иметь дело с профессионалами — всё сделали точно в срок, вывезли мусор, ничего не оставили. Рекомендую!</div>
+        <div class="review-source">Источник: <span>Яндекс.Карты</span></div>
+      </div>
+
+      <!-- Отзыв 2 -->
+      <div class="review-card">
+        <div class="review-header">
+          <div class="review-avatar">Д</div>
+          <div class="review-meta">
+            <div class="review-name">Дина</div>
+            <div class="review-date">3 июля 2021</div>
+          </div>
+        </div>
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">Бригада работает хорошо, заказывала очистить участок около раменского. Всё сделали быстро, по разумной цене. Связь была хорошая, на вопросы отвечали сразу.</div>
+        <div class="review-source">Источник: <span>Google</span></div>
+      </div>
+
+      <!-- Отзыв 3 -->
+      <div class="review-card">
+        <div class="review-header">
+          <div class="review-avatar">Н</div>
+          <div class="review-meta">
+            <div class="review-name">Николай</div>
+            <div class="review-date">15 июня 2021</div>
+          </div>
+        </div>
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">Быстро ответили, стоимость озвучили сразу, сделали нормально. Рекомендую! Участок был сильно заросший, но справились за один день.</div>
+        <div class="review-source">Источник: <span>Яндекс.Карты</span></div>
+      </div>
+
+      <!-- Отзыв 4 — новый -->
+      <div class="review-card">
+        <div class="review-header">
+          <div class="review-avatar">О</div>
+          <div class="review-meta">
+            <div class="review-name">Ольга</div>
+            <div class="review-date">2 июня 2022</div>
+          </div>
+        </div>
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">Обратилась после долгих поисков — участок 25 соток не трогался лет 10. Ребята справились за 2 дня, цену не меняли. Очень довольна результатом, теперь можно строиться!</div>
+        <div class="review-source">Источник: <span>Авито</span></div>
+      </div>
+
+      <!-- Отзыв 5 — новый -->
+      <div class="review-card">
+        <div class="review-header">
+          <div class="review-avatar">С</div>
+          <div class="review-meta">
+            <div class="review-name">Сергей</div>
+            <div class="review-date">18 апреля 2022</div>
+          </div>
+        </div>
+        <div class="review-stars">★★★★☆</div>
+        <div class="review-text">Хорошая работа, всё чисто убрали. Единственное — пришлось немного подождать выезда, но в итоге всё сделали качественно. Корчёвку пней сделали на отлично.</div>
+        <div class="review-source">Источник: <span>Яндекс.Карты</span></div>
+      </div>
+
+      <!-- Отзыв 6 — новый -->
+      <div class="review-card">
+        <div class="review-header">
+          <div class="review-avatar">Е</div>
+          <div class="review-meta">
+            <div class="review-name">Екатерина</div>
+            <div class="review-date">5 августа 2022</div>
+          </div>
+        </div>
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">Заказывала покос травы и вывоз. Приехали вовремя, работали аккуратно. Сосед тоже заинтересовался — передала контакт. Буду обращаться снова весной.</div>
+        <div class="review-source">Источник: <span>Google</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== ФОТОГАЛЕРЕЯ ===== -->
+<div class="portfolio" id="portfolio">
+  <div class="container">
+    <div class="title-shadow">
+      <span class="shadow">Примеры работ</span>
+      <h2>Примеры работ</h2>
+    </div>
+  </div>
+  <div class="portfolio-slider">
+    <!-- ЗАМЕНИТЕ ссылки на актуальные фотографии работ -->
+    <div class="slide-photo">
+      <a href="images/IMG_20200630_180812-scaled.jpg" rel="lightbox[portfolio]" style="background:url(images/IMG_20200630_180812-scaled.jpg); background-size:cover;">+</a>
+    </div>
+    <div class="slide-photo">
+      <a href="images/IMG_20200630_143204-1-scaled.jpg" rel="lightbox[portfolio]" style="background:url(images/IMG_20200630_143204-1-scaled.jpg); background-size:cover;">+</a>
+    </div>
+    <div class="slide-photo">
+      <a href="images/IMG_20200630_103214-scaled.jpg" rel="lightbox[portfolio]" style="background:url(images/IMG_20200630_103214-scaled.jpg); background-size:cover;">+</a>
+    </div>
+    <div class="slide-photo">
+      <a href="images/IMG_20200630_143122-scaled.jpg" rel="lightbox[portfolio]" style="background:url(images/IMG_20200630_143122-scaled.jpg); background-size:cover;">+</a>
+    </div>
+    <div class="slide-photo">
+      <a href="images/IMG_20200708_201047-scaled.jpg" rel="lightbox[portfolio]" style="background:url(images/IMG_20200708_201047-scaled.jpg); background-size:cover;">+</a>
+    </div>
+    <div class="slide-photo">
+      <a href="images/IMG_20200630_180811-scaled.jpg" rel="lightbox[portfolio]" style="background:url(images/IMG_20200630_180811-scaled.jpg); background-size:cover;">+</a>
+    </div>
+    <div class="slide-photo">
+      <a href="images/IMG_20200807_115545-scaled.jpg" rel="lightbox[portfolio]" style="background:url(images/IMG_20200807_115545-scaled.jpg); background-size:cover;">+</a>
+    </div>
+    <div class="slide-photo">
+      <a href="images/IMG_20210629_203551-scaled.jpg" rel="lightbox[portfolio]" style="background:url(images/IMG_20210629_203551-scaled.jpg); background-size:cover;">+</a>
+    </div>
+    <div class="slide-photo">
+      <a href="images/IMG_20210701_085646-scaled.jpg" rel="lightbox[portfolio]" style="background:url(images/IMG_20210701_085646-scaled.jpg); background-size:cover;">+</a>
+    </div>
+    <div class="slide-photo">
+      <a href="images/IMG_20210629_115405-scaled.jpg" rel="lightbox[portfolio]" style="background:url(images/IMG_20210629_115405-scaled.jpg); background-size:cover;">+</a>
+    </div>
+    <div class="slide-photo">
+      <a href="images/slide1.jpg" rel="lightbox[portfolio]" style="background:url(images/slide1.jpg); background-size:cover;">+</a>
+    </div>
+    <div class="slide-photo">
+      <a href="images/slide2.jpg" rel="lightbox[portfolio]" style="background:url(images/slide2.jpg); background-size:cover;">+</a>
+    </div>
+    <div class="slide-photo">
+      <a href="images/slide3.jpg" rel="lightbox[portfolio]" style="background:url(images/slide3.jpg); background-size:cover;">+</a>
+    </div>
+  </div>
+</div>
+
+<!-- ===== НОВЫЙ БЛОК ВИДЕО (по аналогии с галереей) ===== -->
+<section class="videos-section" id="videos">
+  <div class="container">
+    <div class="title-shadow">
+      <span class="shadow">Видеогалерея</span>
+      <h2>Видео о работе</h2>
+    </div>
+    <div class="videos-grid">
+      <!--
+        Чтобы добавить видео с YouTube или VK:
+        1. Замените data-video на ссылку на видео
+        2. Замените img src на обложку видео
+        3. Добавьте аналогичные блоки для новых видео
+      -->
+      <div class="video-card" data-video="https://rasschitka.ru/wp-content/uploads/2021/07/VID-20210706-WA0028.mp4">
+        <img src="images/IMG_20210629_203551-scaled.jpg" alt="Видео о работе 1">
+        <div class="video-play-btn">
+          <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="40" cy="40" r="38" fill="rgba(255,255,255,0.85)"/>
+            <polygon points="32,24 60,40 32,56" fill="#4aaedc"/>
+          </svg>
+        </div>
+        <div class="video-card-label">Расчистка участка · июль 2021</div>
+      </div>
+      <div class="video-card" data-video="https://rasschitka.ru/wp-content/uploads/2021/07/VID-20200810-WA0001-1.mp4">
+        <img src="images/IMG_20200630_143122-scaled.jpg" alt="Видео о работе 2">
+        <div class="video-play-btn">
+          <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="40" cy="40" r="38" fill="rgba(255,255,255,0.85)"/>
+            <polygon points="32,24 60,40 32,56" fill="#4aaedc"/>
+          </svg>
+        </div>
+        <div class="video-card-label">Вырубка кустарников · август 2020</div>
+      </div>
+      <div class="video-card" data-video="https://rasschitka.ru/wp-content/uploads/2021/07/VID-20200811-WA0011-1.mp4">
+        <img src="images/slide1.jpg" alt="Видео о работе 3">
+        <div class="video-play-btn">
+          <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="40" cy="40" r="38" fill="rgba(255,255,255,0.85)"/>
+            <polygon points="32,24 60,40 32,56" fill="#4aaedc"/>
+          </svg>
+        </div>
+        <div class="video-card-label">Уборка участка · август 2020</div>
+      </div>
+      <div class="video-card" data-video="https://rasschitka.ru/wp-content/uploads/2021/07/VID-20210706-WA0029.mp4">
+        <img src="images/video_cover_1.jpg" alt="Видео о работе 4">
+        <div class="video-play-btn">
+          <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="40" cy="40" r="38" fill="rgba(255,255,255,0.85)"/>
+            <polygon points="32,24 60,40 32,56" fill="#4aaedc"/>
+          </svg>
+        </div>
+        <div class="video-card-label">Работа бригады · июль 2021</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA-2 — ФОРМА ЗАЯВКИ С КАПЧЕЙ ===== -->
+<div class="cta-2">
+  <div class="container">
+    <div class="cta-2-box">
+      <div class="discont">
+        <p style="text-align:center;">Скидка</p>
+        <h3 style="text-align:center;">5%</h3>
+        <p style="text-align:center;">при заказе онлайн</p>
+      </div>
+      <div class="cta2-title">Остались вопросы?</div>
+      <div class="cta-2-subtitle">Оставьте заявку — перезвоним в течение 15 минут</div>
+
+     
+      <div class="cf">
+        <form class="cta-2-form" id="mainContactForm" novalidate>
+          <div class="form-row">
+            <input type="text" name="name" placeholder="Ваше имя" required>
+            <input type="tel" name="phone" placeholder="+7 (___) ___ __ __" required>
+            <div class="form-submis">
+              <input type="submit" value="Отправить">
+            </div>
+          </div>
+         
+          <div class="pp">Нажимая кнопку вы даёте согласие на <a href="#" target="_blank">обработку персональных данных</a></div>
+          <div class="form-success-msg" id="mainFormSuccess">✅ Заявка отправлена! Перезвоним в течение 15 минут.</div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== ФУТЕР ===== -->
+<footer class="ndg-footer">
+  <div class="footer-row">
+    <div class="container flex-row fsb aic">
+      <!-- ЗАМЕНИТЕ на актуальный логотип футера -->
+      <img src="images/logo.png" alt="Воробьев и компания" class="footer-logo">
+      <div class="menu-glavnoe-container">
+        <ul class="footer-menu">
+          <li><a href="#about">О компании</a></li>
+          <li><a href="#price">Прайс</a></li>
+          <li><a href="#portfolio">Примеры работ</a></li>
+          <li><a href="#reviews">Отзывы</a></li>
+          <li><a href="#videos">Видео</a></li>
+        </ul>
+      </div>
+      <div class="footer-contact-block">
+        <!-- ЗАМЕНИТЕ на актуальный номер телефона -->
+        <a href="tel:+79164272554">+7 (916) 427-25-54</a>
+        <!-- ЗАМЕНИТЕ на актуальный email -->
+        <a href="mailto:info@rasschitka.ru" style="display:block;font-size:14px;margin-top:4px;">info@rasschitka.ru</a>
+        <button class="link-btn open-callback-modal">Заказать звонок</button>
+        <p class="oferta">Сайт не является публичной офертой</p>
+      </div>
+    </div>
+  </div>
+  <div class="copy-row">
+    <div class="container">
+      <p class="copy">© 2024, все права защищены.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ===== МОДАЛЬНОЕ ОКНО «ЗАКАЗАТЬ ЗВОНОК» ===== -->
+<div class="modal-overlay" id="callbackModal">
+  <div class="modal-box">
+    <button class="modal-close" id="modalClose" aria-label="Закрыть">&times;</button>
+    <div class="modal-title">Заказать звонок</div>
+    <div class="modal-subtitle">Оставьте заявку — перезвоним в течение 15 минут</div>
+    <form class="modal-form" id="callbackForm" novalidate>
+      <div class="field-group">
+        <input type="text" name="name" placeholder="Ваше имя" required>
+        <input type="tel" name="phone" placeholder="+7 (___) ___ __ __" required>
+      </div>
+    
+      <button type="submit" class="btn-submit">Перезвоните мне</button>
+      <div class="privacy-note">Нажимая кнопку, вы соглашаетесь на <a href="#">обработку персональных данных</a></div>
+    </form>
+    <div class="modal-success" id="callbackSuccess">
+      <div class="success-icon">✅</div>
+      <p><strong>Заявка принята!</strong><br>Перезвоним в течение 15 минут.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ===== OVERLAY (фон для всплывающих окон) ===== -->
+<div class="ndg-overall"></div>
+
+<script src="js/fgsjh_4.js" id="wp-polyfill-js"></script>
+<script src="js/fgsjh_1.js" id="contact-form-7-js"></script>
+<script src="js/fgsjh_3.js" id="wpcf7mf-mask-js"></script>
+<script src="js/fgsjh.js" id="wp-embed-js"></script>
+
+<script>
+(function() {
+  /* ---- Модальное окно «Заказать звонок» ---- */
+  var modal    = document.getElementById('callbackModal');
+  var closeBtn = document.getElementById('modalClose');
+  var form     = document.getElementById('callbackForm');
+  var success  = document.getElementById('callbackSuccess');
+
+  function openModal() {
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal() {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  // Открываем по всем кнопкам-триггерам
+  document.querySelectorAll('.open-callback-modal').forEach(function(btn) {
+    btn.addEventListener('click', openModal);
+  });
+
+  closeBtn.addEventListener('click', closeModal);
+  modal.addEventListener('click', function(e) {
+    if (e.target === modal) closeModal();
+  });
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeModal();
+  });
+
+  // Отправка формы в модальном окне
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    var nameVal  = form.querySelector('[name="name"]').value.trim();
+    var phoneVal = form.querySelector('[name="phone"]').value.trim();
+    if (!nameVal || !phoneVal) {
+      alert('Пожалуйста, заполните имя и телефон.');
+      return;
+    }
+    /*
+      НАСТРОЙКА EMAIL-УВЕДОМЛЕНИЙ:
+      Раскомментируйте и настройте один из вариантов:
+
+      Вариант A — EmailJS (бесплатно, без бэкенда):
+        emailjs.send('ВАШ_SERVICE_ID', 'ВАШ_TEMPLATE_ID', {
+          from_name: nameVal,
+          phone: phoneVal,
+          to_email: 'ВАША_ПОЧТА@EXAMPLE.COM'
+        });
+
+      Вариант B — Formspree:
+        fetch('https://formspree.io/f/ВАШ_ID', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name: nameVal, phone: phoneVal })
+        });
+
+      Вариант C — собственный PHP-скрипт:
+        fetch('send.php', { method: 'POST', body: new FormData(form) });
+    */
+
+    // Показываем успех
+    form.style.display = 'none';
+    success.style.display = 'block';
+
+    // Через 3 сек закрываем
+    setTimeout(function() {
+      closeModal();
+      form.style.display = '';
+      success.style.display = 'none';
+      form.reset();
+    }, 3000);
+  });
+
+  /* ---- Отправка основной формы (CTA-2) ---- */
+  var mainForm    = document.getElementById('mainContactForm');
+  var mainSuccess = document.getElementById('mainFormSuccess');
+  if (mainForm) {
+    mainForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      var n = mainForm.querySelector('[name="name"]').value.trim();
+      var p = mainForm.querySelector('[name="phone"]').value.trim();
+      if (!n || !p) { alert('Заполните имя и телефон.'); return; }
+      // Здесь добавьте реальную отправку (см. варианты выше)
+      mainSuccess.style.display = 'block';
+      mainForm.querySelector('[type="submit"]').disabled = true;
+    });
+  }
+
+  /* ---- Видеоблок — открываем видео ---- */
+  document.querySelectorAll('.video-card').forEach(function(card) {
+    card.addEventListener('click', function() {
+      var url = card.getAttribute('data-video');
+      if (!url) return;
+      // Если ссылка на mp4 — открываем в новой вкладке; для YouTube используйте iframe
+      if (url.includes('youtube.com') || url.includes('youtu.be')) {
+        // Пример: преобразуем в embed и открываем в lightbox
+        window.open(url, '_blank');
+      } else {
+        window.open(url, '_blank');
+      }
+    });
+  });
+
+  /* ---- Мобильное меню ---- */
+  var mobileBtn  = document.querySelector('.mobile-menu-btn');
+  var mobileMenu = document.querySelector('.mobile-menu');
+  if (mobileBtn && mobileMenu) {
+    mobileBtn.addEventListener('click', function() {
+      mobileMenu.classList.toggle('active');
+    });
+  }
+})();
+</script>
+</body>
+</html>
